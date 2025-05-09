@@ -11,10 +11,20 @@ namespace Exportar
     internal class Acciones
     {
         private List<Alumno> alumnoList = new List<Alumno>();
+        Correo correo = new Correo();
 
         public List<Alumno> Mostrar()
         {
-            return alumnoList;
+            try
+            {
+                return alumnoList;
+
+            }
+            catch (Exception ex)
+            {
+                correo.EnviarCorreo(ex.ToString());
+                throw;
+            }
         }
         public bool ExportaraExcel()
         {
@@ -50,9 +60,9 @@ namespace Exportar
 
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                correo.EnviarCorreo(ex.ToString());
                 return false;
             }
         }
@@ -88,9 +98,9 @@ namespace Exportar
                 alumnoList = newList;
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                correo.EnviarCorreo(ex.ToString());
                 return false;
             }
         }
